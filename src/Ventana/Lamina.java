@@ -128,7 +128,7 @@ public class Lamina extends JPanel implements ActionListener, KeyListener{
     }
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
+        System.out.println("goooo");
         
     }
     @Override
