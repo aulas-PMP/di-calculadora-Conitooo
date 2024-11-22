@@ -118,7 +118,6 @@ public class Lamina extends JPanel implements ActionListener, KeyListener{
         }
     }
 
-    @OverridePesonas
     public void keyPressed(KeyEvent e) {
         
         if(e.getKeyCode()==KeyEvent.VK_NUMPAD2){
