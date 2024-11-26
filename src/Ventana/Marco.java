@@ -28,5 +28,6 @@ public class Marco extends JFrame{
         miMarco.setVisible(true);
         miMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         miMarco.setTitle("Calculadora");
+        miMarco.setBackground(Color.BLUE);
     }
 }
