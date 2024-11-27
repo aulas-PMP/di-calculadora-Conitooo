@@ -17,11 +17,17 @@ public class Lamina extends JPanel implements ActionListener, KeyListener {
     private Color myBackground = new Color(67, 46, 84);
     private Color myButton = new Color(55, 58, 64);
 
-    private static final String[] BOTONES = {
-            "1", "2", "3", "+",
-            "4", "5", "6", "-",
-            "7", "8", "9", "*",
-            "C", "0", "=", "/"
+    private static final String[] NUMEROS = {
+            "1", "2", "3", 
+            "4", "5", "6", 
+            "7", "8", "9",
+            "0","="
+    };
+
+    private static final String[] OPERACIONES = {
+        "+","-",
+        "*","/",
+        "C","<=",
     };
 
     /**
@@ -57,11 +63,21 @@ public class Lamina extends JPanel implements ActionListener, KeyListener {
      * Crea y configura el panel de botones.
      */
     private void agregarPanelBotones() {
-        JPanel panelBotones = new JPanel();
-        panelBotones.setLayout(new GridLayout(4, 6, 2, 2));
-        agregarBotones(BOTONES, panelBotones);
-        add(panelBotones, BorderLayout.CENTER);
-        panelBotones.setBackground(myBackground);
+        JPanel panelContenedor = new JPanel();
+        JPanel panelNumeros = new JPanel();
+        JPanel panelOperaciones = new JPanel();
+        panelContenedor.setLayout(new FlowLayout());
+        panelContenedor.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        panelOperaciones.setLayout(new GridLayout(3,2));
+        panelNumeros.setLayout(new GridLayout(5, 4, 5, 5));
+        agregarBotones(NUMEROS, panelNumeros);
+        agregarBotones(OPERACIONES,panelOperaciones);
+        add(panelNumeros, panelContenedor);
+        
+        add(panelOperaciones,panelContenedor);
+        add(panelContenedor); //TODO Completar el panel 
+        panelNumeros.setBackground(myBackground);
+        panelOperaciones.setBackground(myBackground);
     }
 
     /**
@@ -82,6 +98,7 @@ public class Lamina extends JPanel implements ActionListener, KeyListener {
      * @param panel   Panel donde se agregarán los botones.
      */
     private void agregarBotones(String[] botones, JPanel panel) {
+        
         for (String boton : botones) {
             JButton btn = new JButton(boton);
             btn.setFocusable(false);
@@ -109,7 +126,10 @@ public class Lamina extends JPanel implements ActionListener, KeyListener {
                 procesarResultado();
             } else if ("C".equals(comando)) {
                 limpiar();
+            } else if ("<=".equals(comando)){
+                borrarUltimo();
             }
+
         } catch (NullPointerException | NumberFormatException ex) {
             ex.printStackTrace();
         }
@@ -186,6 +206,15 @@ public class Lamina extends JPanel implements ActionListener, KeyListener {
             limpiar();
         }
     }
+    //Borra el último elemennto.
+    public void borrarUltimo(){
+        if(!texto.getText().isEmpty()){
+            String linea = texto.getText();
+            int tamano = linea.length();
+            linea = linea.substring(0, tamano-1);
+            texto.setText(linea);
+        }
+    }
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -196,4 +225,8 @@ public class Lamina extends JPanel implements ActionListener, KeyListener {
     public void keyTyped(KeyEvent e) {
         // No implementado
     }
+
+
+
+    
 }

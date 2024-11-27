@@ -4,7 +4,7 @@
 import Ventana.Marco;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
        Marco.init();
        
     }
